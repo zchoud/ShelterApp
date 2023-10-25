@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy your entire project directory (including the pom.xml) into the container
 COPY . /app
 
+# Install Maven and its prerequisites
+RUN apt-get update && apt-get install -y maven
+
 # Build the Java application using Maven
 RUN mvn clean package
 
