@@ -1,17 +1,4 @@
-# Use an official OpenJDK base image with a specific version of Java
-FROM openjdk:17
-
-# Set a working directory inside the container
-WORKDIR /app
-
-# Copy your entire project directory (including the pom.xml) into the container
-COPY . /app
-
-# Install Maven and its prerequisites
-RUN apt-get update && apt-get install -y maven
-
-# Build the Java application using Maven
-RUN mvn clean package
-
-# Define the entry point to run your Spring Boot application
-CMD ["java", "-jar", "target/dashboard-0.0.1-SNAPSHOT.war"]
+FROM eclipse-temurin:17-jdk-alpine
+VOLUME /tmp
+COPY targe/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
