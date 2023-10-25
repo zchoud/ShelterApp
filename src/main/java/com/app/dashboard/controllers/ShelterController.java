@@ -34,7 +34,7 @@ public class ShelterController {
         // Check if limit and skip parameters are provided and use default values if not
         int limitValue = (limit != null) ? limit : 50;
         int skipValue = (skip != null) ? skip : 0;
-        
+
         return repository.getSheltersPaganeted(skipValue, limitValue);
     }
 }
