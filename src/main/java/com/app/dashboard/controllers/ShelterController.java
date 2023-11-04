@@ -1,6 +1,9 @@
 package com.app.dashboard.controllers;
 
 import com.app.dashboard.ShelterRepository;
+import com.app.dashboard.models.DataAnalyticsResponse;
+import com.app.dashboard.models.FiltersListResponse;
+import com.app.dashboard.models.LocationAnalyticsResponse;
 import com.app.dashboard.models.Shelter;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +39,26 @@ public class ShelterController {
         int skipValue = (skip != null) ? skip : 0;
 
         return repository.getSheltersPaganeted(skipValue, limitValue);
+    }
+
+    @GetMapping("/analytics/occupancy")
+    @CrossOrigin
+    @ApiOperation(value = "Get shelter analytic data", notes = "Get data on beds and occupation.")
+    public DataAnalyticsResponse getOccupancyData() {
+        return repository.getDataAnalytics();
+    }
+
+    @GetMapping("/filters")
+    @CrossOrigin
+    @ApiOperation(value = "Get shelter filters data", notes = "Get filters available and the list of items.")
+    public FiltersListResponse getFiltersData() {
+        return repository.getShelterFilters();
+    }
+
+    @GetMapping("/analytics/cities")
+    @CrossOrigin
+    @ApiOperation(value = "Get city analytics", notes = "Get city analytics on occupied and unocupied beds.")
+    public List<LocationAnalyticsResponse> getLocationAnalytics() {
+        return repository.getLocationAnalytics();
     }
 }
