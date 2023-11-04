@@ -1,0 +1,7 @@
+com\app\dashboard\models\FiltersListResponse.class
+com\app\dashboard\ShelterRepository.class
+com\app\dashboard\models\LocationAnalyticsResponse.class
+com\app\dashboard\DashboardApplication.class
+com\app\dashboard\models\Shelter.class
+com\app\dashboard\controllers\ShelterController.class
+com\app\dashboard\models\DataAnalyticsResponse.class
