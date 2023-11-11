@@ -1,7 +1,9 @@
 F:\Documents\School\Seneca\.Semester 7\PRJ666\backend\ShelterApp\ShelterApp\src\main\java\com\app\dashboard\models\LocationAnalyticsResponse.java
+F:\Documents\School\Seneca\.Semester 7\PRJ666\backend\ShelterApp\ShelterApp\src\main\java\com\app\dashboard\models\CreateShelterRequest.java
 F:\Documents\School\Seneca\.Semester 7\PRJ666\backend\ShelterApp\ShelterApp\src\main\java\com\app\dashboard\controllers\ShelterController.java
 F:\Documents\School\Seneca\.Semester 7\PRJ666\backend\ShelterApp\ShelterApp\src\main\java\com\app\dashboard\models\Shelter.java
 F:\Documents\School\Seneca\.Semester 7\PRJ666\backend\ShelterApp\ShelterApp\src\main\java\com\app\dashboard\models\DataAnalyticsResponse.java
 F:\Documents\School\Seneca\.Semester 7\PRJ666\backend\ShelterApp\ShelterApp\src\main\java\com\app\dashboard\ShelterRepository.java
 F:\Documents\School\Seneca\.Semester 7\PRJ666\backend\ShelterApp\ShelterApp\src\main\java\com\app\dashboard\models\FiltersListResponse.java
 F:\Documents\School\Seneca\.Semester 7\PRJ666\backend\ShelterApp\ShelterApp\src\main\java\com\app\dashboard\DashboardApplication.java
+F:\Documents\School\Seneca\.Semester 7\PRJ666\backend\ShelterApp\ShelterApp\src\main\java\com\app\dashboard\services\ShelterService.java

@@ -8,8 +8,10 @@ import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ShelterRepository extends MongoRepository<Shelter,String> {
+
 
     @Aggregation(pipeline = {
             "{ '$skip' : ?0 }",
@@ -23,7 +25,18 @@ public interface ShelterRepository extends MongoRepository<Shelter,String> {
     DataAnalyticsResponse getDataAnalytics();
 
     @Aggregation(pipeline = {
-            "{ '$group' : { '_id' : 0, 'uniqueOrganizationNames' : { '$addToSet' : '$ORGANIZATION_NAME' }, 'uniqueShelterGroups' : { '$addToSet' : '$SHELTER_GROUP' }, 'uniqueCities' : { '$addToSet' : '$LOCATION_CITY' }, 'uniqueProvinces' : { '$addToSet' : '$LOCATION_PROVINCE' }, 'uniqueSectors' : { '$addToSet' : '$SECTOR' }, 'uniqueProgramModels' : { '$addToSet' : '$PROGRAM_MODEL' }, 'uniqueServiceTypes' : { '$addToSet' : '$OVERNIGHT_SERVICE_TYPE' }, 'uniqueProgramAreas' : { '$addToSet' : '$PROGRAM_AREA' }, 'uniqueCapacityTypes' : { '$addToSet' : '$CAPACITY_TYPE' } } }"
+            "{ '$group' : { " +
+                    "'_id' : 0, " +
+                    "'uniqueOrganizationNames' : { " +
+                    "'$addToSet' : '$ORGANIZATION_NAME' }, " +
+                    "'uniqueShelterGroups' : { '$addToSet' : '$SHELTER_GROUP' }, " +
+                    "'uniqueCities' : { '$addToSet' : '$LOCATION_CITY' }, " +
+                    "'uniqueProvinces' : { '$addToSet' : '$LOCATION_PROVINCE' }, " +
+                    "'uniqueSectors' : { '$addToSet' : '$SECTOR' }, " +
+                    "'uniqueProgramModels' : { '$addToSet' : '$PROGRAM_MODEL' }, " +
+                    "'uniqueServiceTypes' : { '$addToSet' : '$OVERNIGHT_SERVICE_TYPE' }, " +
+                    "'uniqueProgramAreas' : { '$addToSet' : '$PROGRAM_AREA' }, " +
+                    "'uniqueCapacityTypes' : { '$addToSet' : '$CAPACITY_TYPE' } } }"
     })
     FiltersListResponse getShelterFilters();
 

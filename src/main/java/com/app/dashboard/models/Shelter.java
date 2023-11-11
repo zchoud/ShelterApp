@@ -67,19 +67,19 @@ public class Shelter {
     private String capacityType;
 
     @Field("CAPACITY_ACTUAL_BED")
-    private String capacityActualBed;
+    private Integer capacityActualBed;
 
     @Field("CAPACITY_FUNDING_BED")
-    private String capacityFundingBed;
+    private Integer capacityFundingBed;
 
     @Field("OCCUPIED_BEDS")
-    private String occupiedBeds;
+    private Integer occupiedBeds;
 
     @Field("UNOCCUPIED_BEDS")
-    private String unoccupiedBeds;
+    private Integer unoccupiedBeds;
 
     @Field("UNAVAILABLE_BEDS")
-    private String unavailableBeds;
+    private Integer unavailableBeds;
 
     @Field("CAPACITY_ACTUAL_ROOM")
     private Integer capacityActualRoom;
@@ -97,7 +97,7 @@ public class Shelter {
     private Integer unavailableRooms;
 
     @Field("OCCUPANCY_RATE_BEDS")
-    private String occupancyRateBeds;
+    private Integer occupancyRateBeds;
 
     @Field("OCCUPANCY_RATE_ROOMS")
     private Integer occupancyRateRooms;
@@ -262,43 +262,43 @@ public class Shelter {
         this.capacityType = capacityType;
     }
 
-    public String getCapacityActualBed() {
+    public Integer getCapacityActualBed() {
         return capacityActualBed;
     }
 
-    public void setCapacityActualBed(String capacityActualBed) {
+    public void setCapacityActualBed(Integer capacityActualBed) {
         this.capacityActualBed = capacityActualBed;
     }
 
-    public String getCapacityFundingBed() {
+    public Integer getCapacityFundingBed() {
         return capacityFundingBed;
     }
 
-    public void setCapacityFundingBed(String capacityFundingBed) {
+    public void setCapacityFundingBed(Integer capacityFundingBed) {
         this.capacityFundingBed = capacityFundingBed;
     }
 
-    public String getOccupiedBeds() {
+    public Integer getOccupiedBeds() {
         return occupiedBeds;
     }
 
-    public void setOccupiedBeds(String occupiedBeds) {
+    public void setOccupiedBeds(Integer occupiedBeds) {
         this.occupiedBeds = occupiedBeds;
     }
 
-    public String getUnoccupiedBeds() {
+    public Integer getUnoccupiedBeds() {
         return unoccupiedBeds;
     }
 
-    public void setUnoccupiedBeds(String unoccupiedBeds) {
+    public void setUnoccupiedBeds(Integer unoccupiedBeds) {
         this.unoccupiedBeds = unoccupiedBeds;
     }
 
-    public String getUnavailableBeds() {
+    public Integer getUnavailableBeds() {
         return unavailableBeds;
     }
 
-    public void setUnavailableBeds(String unavailableBeds) {
+    public void setUnavailableBeds(Integer unavailableBeds) {
         this.unavailableBeds = unavailableBeds;
     }
 
@@ -342,11 +342,11 @@ public class Shelter {
         this.unavailableRooms = unavailableRooms;
     }
 
-    public String getOccupancyRateBeds() {
+    public Integer getOccupancyRateBeds() {
         return occupancyRateBeds;
     }
 
-    public void setOccupancyRateBeds(String occupancyRateBeds) {
+    public void setOccupancyRateBeds(Integer occupancyRateBeds) {
         this.occupancyRateBeds = occupancyRateBeds;
     }
 
@@ -357,4 +357,23 @@ public class Shelter {
     public void setOccupancyRateRooms(Integer occupancyRateRooms) {
         this.occupancyRateRooms = occupancyRateRooms;
     }
+
+    public void mergeShelters(Shelter updatedShelter) {
+        java.lang.reflect.Field[] fields = Shelter.class.getDeclaredFields();
+
+        for (java.lang.reflect.Field field : fields) {
+            field.setAccessible(true);
+
+            try {
+                Object updatedValue = field.get(updatedShelter);
+
+                if (updatedValue != null) {
+                    field.set(this, updatedValue);
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
