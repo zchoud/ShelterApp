@@ -48,6 +48,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
+          token: ${{ secrets.pat }}
           context: "{{defaultContext}}"
           push: true
           tags: ${{ steps.meta.outputs.tags }}
