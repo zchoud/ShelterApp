@@ -7,14 +7,13 @@ on:
     branches: [ "dev", "prod" ]
 
 env:
-  # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
-  # github.repository as <account>/<repo>
   IMAGE_NAME: zchoud19/shelterapp
 
 jobs:
 
   build:
+    name: Build
 
     runs-on: ubuntu-latest
 
