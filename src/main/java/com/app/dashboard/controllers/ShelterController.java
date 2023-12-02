@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import springfox.documentation.annotations.ApiIgnore;
@@ -115,8 +116,12 @@ public class ShelterController {
     @CrossOrigin
     @ApiOperation(value = "Add shelter", notes = "Add shelter to DB with required data.")
     public Shelter addShelter(
-            @RequestBody(required = true) CreateShelterRequest request
+            @RequestBody(required = true) CreateShelterRequest request,
+            BindingResult bindingResult
     ) {
+        if (bindingResult.hasErrors()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid request: "+bindingResult.toString());
+        }
         return service.createShelter(request);
     }
 

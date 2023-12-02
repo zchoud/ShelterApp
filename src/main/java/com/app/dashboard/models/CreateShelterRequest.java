@@ -2,6 +2,10 @@ package com.app.dashboard.models;
 
 import org.bson.Document;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.regex.Pattern;
+
 public class CreateShelterRequest {
 
     private String occupancyDate;
@@ -44,6 +48,8 @@ public class CreateShelterRequest {
                           int capacityFundingBed, int occupiedBeds, int unoccupiedBeds, int unavailableBeds,
                           int capacityActualRoom, int capacityFundingRoom, int occupiedRooms, int unoccupiedRooms,
                           int unavailableRooms, double occupancyRateBeds, double occupancyRateRooms) {
+        // confirm date is yyyy-mm-dd format
+        validateDate(occupancyDate);
         this.occupancyDate = occupancyDate;
         this.organizationId = organizationId;
         this.organizationName = organizationName;
@@ -52,6 +58,7 @@ public class CreateShelterRequest {
         this.locationId = locationId;
         this.locationName = locationName;
         this.locationAddress = locationAddress;
+        validatePostalCode(locationPostalCode);
         this.locationPostalCode = locationPostalCode;
         this.locationCity = locationCity;
         this.locationProvince = locationProvince;
@@ -65,11 +72,19 @@ public class CreateShelterRequest {
         this.capacityType = capacityType;
         this.capacityActualBed = capacityActualBed;
         this.capacityFundingBed = capacityFundingBed;
+        // occupied beds + unavailable + occupied cannot be greater than capacity actual bed
+        if ((occupiedBeds + unavailableBeds + unoccupiedBeds) > capacityActualBed){
+            throw new IllegalArgumentException("Invalid bed count.");
+        }
         this.occupiedBeds = occupiedBeds;
         this.unoccupiedBeds = unoccupiedBeds;
         this.unavailableBeds = unavailableBeds;
         this.capacityActualRoom = capacityActualRoom;
         this.capacityFundingRoom = capacityFundingRoom;
+        // same calculation for rooms
+        if ((occupiedRooms + unoccupiedRooms + unavailableRooms) > capacityActualRoom){
+            throw new IllegalArgumentException("Invalid room count.");
+        }
         this.occupiedRooms = occupiedRooms;
         this.unoccupiedRooms = unoccupiedRooms;
         this.unavailableRooms = unavailableRooms;
@@ -357,6 +372,23 @@ public class CreateShelterRequest {
 
     public void setOccupancyRateRooms(double occupancyRateRooms) {
         this.occupancyRateRooms = occupancyRateRooms;
+    }
+
+    public static void validateDate(String dateToValidate) {
+        String dateFormat = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        sdf.setLenient(false);
+        try {
+            sdf.parse(dateToValidate);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Invalid date format or out of range.");
+        }
+    }
+
+    public static boolean validatePostalCode(String postalCode) {
+        // Regular expression for postal code A1A 2C2
+        String canadianPostalCodePattern = "^[A-Za-z]\\d[A-Za-z] \\d[A-Za-z]\\d$";
+        return Pattern.matches(canadianPostalCodePattern, postalCode);
     }
 }
 
