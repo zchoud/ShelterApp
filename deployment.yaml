@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shelterapp-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: shelterapp
+  template:
+    metadata:
+      labels:
+        app: shelterapp
+    spec:
+      containers:
+        - name: shelterapp-container
+          image: shelterapp:latest
+          ports:
+            - containerPort: 5000

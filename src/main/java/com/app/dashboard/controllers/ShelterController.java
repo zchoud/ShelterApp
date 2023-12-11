@@ -106,7 +106,7 @@ public class ShelterController {
 
     @GetMapping("/analytics/cities")
     @CrossOrigin
-    @ApiOperation(value = "Get city analytics", notes = "Get city analytics on occupied and unocupied beds.")
+    @ApiOperation(value = "Get city analytics", notes = "Get city analytics on occupied and unoccupied beds.")
     public List<LocationAnalyticsResponse> getLocationAnalytics() {
         return repository.getLocationAnalytics();
     }
@@ -148,7 +148,7 @@ public class ShelterController {
         if(existingShelter == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Shelter not found");
         }
-        repository.deleteById(id);
+        service.deleteById(id);
         return new ResponseEntity("Shelter deleted.", HttpStatus.ACCEPTED);
     }
 }
