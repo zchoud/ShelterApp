@@ -24,6 +24,12 @@ public class ShelterService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    public void deleteById(String id) {
+        Assert.notNull(id, "ID must not be null");
+        Shelter shelter = this.findById(id);
+        mongoTemplate.remove(new Query(Criteria.where("id").is(shelter.getId())), Shelter.class);
+    }
+
     public Shelter findById(String id) {
         Assert.notNull(id, "ID must not be null");
         return mongoTemplate.findById(new ObjectId(id), Shelter.class);
